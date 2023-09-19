@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon - [taxedgesolution]</title>
+    <title>taxedgesolution</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f5f5f5;
+            background-color: #000; /* Black background color */
             margin: 0;
             padding: 0;
+            color: #fff; /* Text color */
         }
 
         .container {
@@ -27,8 +28,8 @@
             font-size: 18px;
         }
 
-        .countdown {
-            font-size: 24px;
+        .clock {
+            font-size: 48px;
             margin-top: 20px;
         }
 
@@ -44,33 +45,23 @@
         <h1>Coming Soon</h1>
         <p>We are working hard to bring you our accounting services.</p>
         
-        <!-- Countdown Timer - You can customize the date and time -->
-        <div class="countdown" id="countdown"></div>
+        <!-- Digital Clock -->
+        <div class="clock" id="clock"></div>
 
         <script>
-            // Set the date and time for your website launch
-            const launchDate = new Date('2023-12-31 00:00:00').getTime();
+            function updateClock() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+            }
 
-            // Update the countdown every second
-            const countdown = setInterval(function () {
-                const currentDate = new Date().getTime();
-                const distance = launchDate - currentDate;
+            // Update the clock every second
+            setInterval(updateClock, 1000);
 
-                // Calculate days, hours, minutes, and seconds
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // Display the countdown
-                document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-                // If the countdown is over, display a message
-                if (distance < 0) {
-                    clearInterval(countdown);
-                    document.getElementById('countdown').innerHTML = 'Website is now live!';
-                }
-            }, 1000);
+            // Initial update
+            updateClock();
         </script>
     </div>
 </body>
